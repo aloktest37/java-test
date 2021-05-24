@@ -3,6 +3,8 @@ package com.example.h2.api.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import com.example.h2.api.model.Employee;
 @RestController
 @CrossOrigin("http://localhost:4200")
 public class EmployeeController {
+	Logger logger=LoggerFactory.getLogger(this.getClass().getName());
 	
 	@Autowired
 	public EmployeeRepository respository;
@@ -24,6 +27,7 @@ public class EmployeeController {
 	@PostMapping("/saveEmployee")
 	public String saveEmployee(@RequestBody Employee employee) {
 		respository.save(employee);	
+		logger.info("Employee detail saved in db :"+employee);
 		return "Employee save succesfully....";
 	}
 	
