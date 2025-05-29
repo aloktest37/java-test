@@ -17,8 +17,6 @@ public class Test {
 			    new Employee("Eve", "HR", 3500, 25)
 			);
 		
- List<String> names= new Arraylist<>();
-
 		Map<String,String> departMap=	employees.stream()
 					.collect(
 							Collectors.groupingBy(Employee::getDepartment,
