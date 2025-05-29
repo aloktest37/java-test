@@ -1,0 +1,31 @@
+package demo.test2;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class Test {
+	
+	// 1. Get comma-separated Uppercase names grouped by department
+	public static void main(String[] args) {
+		List<Employee> employees = Arrays.asList(
+			    new Employee("Alice", "HR", 3000, 30),
+			    new Employee("Bob", "IT", 5000, 28),
+			    new Employee("Charlie", "IT", 7000, 35),
+			    new Employee("David", "Finance", 4000, 40),
+			    new Employee("Eve", "HR", 3500, 25)
+			);
+		
+		Map<String,String> departMap=	employees.stream()
+					.collect(
+							Collectors.groupingBy(Employee::getDepartment,
+							Collectors.collectingAndThen(
+									Collectors.mapping(Employee::getName, Collectors.toList()),
+									list -> list.stream().map(String::toUpperCase).
+									collect(Collectors.joining(",")))));
+		departMap.entrySet().stream().forEach(e -> System.out.println(e.getKey() + "=" + e.getValue()));
+	}
+
+
+}
